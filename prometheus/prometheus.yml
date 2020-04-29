@@ -1,0 +1,21 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    monitor: 'docker-host-alpha'
+
+rule_files:
+  - "targets.rules"
+  - "host.rules"
+  - "containers.rules"
+
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 30s
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'mi_exporter'
+    scrape_interval: 30s
+    static_configs:
+      - targets: ['mi_exporter:8000']
